@@ -1,7 +1,7 @@
 # Личный проект «Большое путешествие» [![Build status][travis-image]][travis-url]
 
 * Студент: [Игорь Шпизель](https://up.htmlacademy.ru/ecmascript/10/user/872161).
-* Наставник: `Неизвестно`.
+* Наставник: [Александр Бабченко](https://htmlacademy.ru/profile/id619357)
 
 ---
 
