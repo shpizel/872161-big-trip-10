@@ -1,18 +1,13 @@
 'use strict';
 
-const render = (node, parent, where = `beforeEnd`) => {
-  parent.insertAdjacentHTML(where, node);
-};
+const render = (html, target, where = `beforeend`) => target.insertAdjacentHTML(where, html);
 
-const getMenuTemplate = () => {
-  return `<nav class="trip-controls__trip-tabs  trip-tabs">
+const getMenuHTML = () => `<nav class="trip-controls__trip-tabs  trip-tabs">
     <a class="trip-tabs__btn  trip-tabs__btn--active" href="#">Table</a>
     <a class="trip-tabs__btn" href="#">Stats</a>
 </nav>`;
-};
 
-const getFiltersTemplate = () => {
-  return `<form class="trip-filters" action="#" method="get">
+const getFiltersHTML = () => `<form class="trip-filters" action="#" method="get">
   <div class="trip-filters__filter">
     <input id="filter-everything" class="trip-filters__filter-input  visually-hidden" type="radio" name="trip-filter" value="everything" checked>
     <label class="trip-filters__filter-label" for="filter-everything">Everything</label>
@@ -30,10 +25,8 @@ const getFiltersTemplate = () => {
 
   <button class="visually-hidden" type="submit">Accept filter</button>
 </form>`;
-};
 
-const getSorterTemplate = () => {
-  return `<form class="trip-events__trip-sort  trip-sort" action="#" method="get">
+const getSorterHTML = () => `<form class="trip-events__trip-sort  trip-sort" action="#" method="get">
   <span class="trip-sort__item  trip-sort__item--day">Day</span>
 
   <div class="trip-sort__item  trip-sort__item--event">
@@ -63,10 +56,8 @@ const getSorterTemplate = () => {
 
   <span class="trip-sort__item  trip-sort__item--offers">Offers</span>
 </form>`;
-};
 
-const getEditFormTemplate = () => {
-  return `<form class="event  event--edit" action="#" method="post">
+const getEditFormHTML = () => `<form class="event  event--edit" action="#" method="post">
   <header class="event__header">
     <div class="event__type-wrapper">
       <label class="event__type  event__type-btn" for="event-type-toggle-1">
@@ -185,7 +176,6 @@ const getEditFormTemplate = () => {
   </header>
 
   <section class="event__details">
-
     <section class="event__section  event__section--offers">
       <h3 class="event__section-title  event__section-title--offers">Offers</h3>
 
@@ -253,10 +243,8 @@ const getEditFormTemplate = () => {
     </section>
   </section>
 </form>`;
-};
 
-const getCreateFormTemplate = () => {
-  return `<form class="trip-events__item  event  event--edit" action="#" method="post">
+const getCreateFormHTML = () => `<form class="trip-events__item  event  event--edit" action="#" method="post">
   <header class="event__header">
     <div class="event__type-wrapper">
       <label class="event__type  event__type-btn" for="event-type-toggle-1">
@@ -363,69 +351,76 @@ const getCreateFormTemplate = () => {
     <button class="event__reset-btn" type="reset">Cancel</button>
   </header>
 </form>`;
-};
 
-const getTripDaysTemplate = () => {
-  return `<ul class="trip-days">
-  <li class="trip-days__item  day">
-    <div class="day__info">
-      <span class="day__counter">1</span>
-      <time class="day__date" datetime="2019-03-18">MAR 18</time>
+const getTripDaysHTML = () => `<ul class="trip-days"></ul>`;
+
+const getTripDayHTML = () => `<li class="trip-days__item  day">
+  <div class="day__info">
+    <span class="day__counter">1</span>
+    <time class="day__date" datetime="2019-03-18">MAR 18</time>
+  </div>
+  <ul class="trip-events__list"></ul>
+</li>`;
+
+const getTripInfoHTML = () => `<div class="trip-info__main">
+  <h1 class="trip-info__title">Amsterdam &mdash; ... &mdash; Amsterdam</h1>
+  <p class="trip-info__dates">Mar 18&nbsp;&mdash;&nbsp;21</p>
+</div>`;
+
+const getTripCardHTML = () => `<li class="trip-events__item">
+  <div class="event">
+    <div class="event__type">
+      <img class="event__type-icon" width="42" height="42" src="img/icons/taxi.png" alt="Event type icon">
     </div>
+    <h3 class="event__title">Taxi to airport</h3>
 
-    <ul class="trip-events__list"></ul>`;
-};
-
-const getTripCardTemplate = () => {
-  return `<li class="trip-events__item">
-    <div class="event">
-      <div class="event__type">
-        <img class="event__type-icon" width="42" height="42" src="img/icons/taxi.png" alt="Event type icon">
-      </div>
-      <h3 class="event__title">Taxi to airport</h3>
-
-      <div class="event__schedule">
-        <p class="event__time">
-          <time class="event__start-time" datetime="2019-03-18T10:30">10:30</time>
-          &mdash;
-          <time class="event__end-time" datetime="2019-03-18T11:00">11:00</time>
-        </p>
-        <p class="event__duration">1H 30M</p>
-      </div>
-
-      <p class="event__price">
-        &euro;&nbsp;<span class="event__price-value">20</span>
+    <div class="event__schedule">
+      <p class="event__time">
+        <time class="event__start-time" datetime="2019-03-18T10:30">10:30</time>
+        &mdash;
+        <time class="event__end-time" datetime="2019-03-18T11:00">11:00</time>
       </p>
-
-      <h4 class="visually-hidden">Offers:</h4>
-      <ul class="event__selected-offers">
-        <li class="event__offer">
-          <span class="event__offer-title">Order Uber</span>
-          &plus;
-          &euro;&nbsp;<span class="event__offer-price">20</span>
-         </li>
-      </ul>
-
-      <button class="event__rollup-btn" type="button">
-        <span class="visually-hidden">Open event</span>
-      </button>
+      <p class="event__duration">1H 30M</p>
     </div>
-  </li>`;
-};
+
+    <p class="event__price">
+      &euro;&nbsp;<span class="event__price-value">20</span>
+    </p>
+
+    <h4 class="visually-hidden">Offers:</h4>
+    <ul class="event__selected-offers">
+      <li class="event__offer">
+        <span class="event__offer-title">Order Uber</span>
+        &plus;
+        &euro;&nbsp;<span class="event__offer-price">20</span>
+       </li>
+    </ul>
+
+    <button class="event__rollup-btn" type="button">
+      <span class="visually-hidden">Open event</span>
+    </button>
+  </div>
+</li>`;
+
+const tripInfoNode = document.querySelector(`.trip-main__trip-info`);
+render(getTripInfoHTML(), tripInfoNode, `afterbegin`);
 
 const tripControlsNode = document.querySelector(`.trip-controls`);
-render(getMenuTemplate(), tripControlsNode);
-render(getFiltersTemplate(), tripControlsNode);
+render(getMenuHTML(), tripControlsNode);
+render(getFiltersHTML(), tripControlsNode);
 
 const tripEvents = document.querySelector(`.trip-events`);
-render(getSorterTemplate(), tripEvents);
-render(getCreateFormTemplate(), tripEvents);
-render(getTripDaysTemplate(), tripEvents);
+render(getSorterHTML(), tripEvents);
+render(getCreateFormHTML(), tripEvents);
+render(getTripDaysHTML(), tripEvents);
+
+const tripDaysNode = document.querySelector(`.trip-days`);
+render(getTripDayHTML(), tripDaysNode);
 
 const tripEventsListNode = document.querySelector(`.trip-events__list`);
 
-render(getEditFormTemplate(), tripEventsListNode);
+render(getEditFormHTML(), tripEventsListNode);
 
 for (let i = 0; i < 3; i++) {
-  render(getTripCardTemplate(), tripEventsListNode);
+  render(getTripCardHTML(), tripEventsListNode);
 }
