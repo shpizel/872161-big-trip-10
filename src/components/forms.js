@@ -1,23 +1,4 @@
-const getFiltersFormHTML = () => `<form class="trip-filters" action="#" method="get">
-  <div class="trip-filters__filter">
-    <input id="filter-everything" class="trip-filters__filter-input  visually-hidden" type="radio" name="trip-filter" value="everything" checked>
-    <label class="trip-filters__filter-label" for="filter-everything">Everything</label>
-  </div>
-
-  <div class="trip-filters__filter">
-    <input id="filter-future" class="trip-filters__filter-input  visually-hidden" type="radio" name="trip-filter" value="future">
-    <label class="trip-filters__filter-label" for="filter-future">Future</label>
-  </div>
-
-  <div class="trip-filters__filter">
-    <input id="filter-past" class="trip-filters__filter-input  visually-hidden" type="radio" name="trip-filter" value="past">
-    <label class="trip-filters__filter-label" for="filter-past">Past</label>
-  </div>
-
-  <button class="visually-hidden" type="submit">Accept filter</button>
-</form>`;
-
-const getSorterFormHTML = () => `<form class="trip-events__trip-sort  trip-sort" action="#" method="get">
+export const getSorterFormTemplate = () => `<form class="trip-events__trip-sort  trip-sort" action="#" method="get">
   <span class="trip-sort__item  trip-sort__item--day">Day</span>
 
   <div class="trip-sort__item  trip-sort__item--event">
@@ -48,7 +29,7 @@ const getSorterFormHTML = () => `<form class="trip-events__trip-sort  trip-sort"
   <span class="trip-sort__item  trip-sort__item--offers">Offers</span>
 </form>`;
 
-const getEditFormHTML = () => `<form class="event  event--edit" action="#" method="post">
+export const getEditFormTemplate = () => `<form class="event  event--edit" action="#" method="post">
   <header class="event__header">
     <div class="event__type-wrapper">
       <label class="event__type  event__type-btn" for="event-type-toggle-1">
@@ -235,7 +216,7 @@ const getEditFormHTML = () => `<form class="event  event--edit" action="#" metho
   </section>
 </form>`;
 
-const getCreateFormHTML = () => `<form class="trip-events__item  event  event--edit" action="#" method="post">
+export const getCreateFormTemplate = () => `<form class="trip-events__item  event  event--edit" action="#" method="post">
   <header class="event__header">
     <div class="event__type-wrapper">
       <label class="event__type  event__type-btn" for="event-type-toggle-1">
@@ -342,5 +323,3 @@ const getCreateFormHTML = () => `<form class="trip-events__item  event  event--e
     <button class="event__reset-btn" type="reset">Cancel</button>
   </header>
 </form>`;
-
-export {getCreateFormHTML, getEditFormHTML, getFiltersFormHTML, getSorterFormHTML};
